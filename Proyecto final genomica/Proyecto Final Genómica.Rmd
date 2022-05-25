@@ -1,0 +1,382 @@
+---
+title: "Proyecto Final Genómica"
+author: "Plascencia Bahena Ximena & Ceci Salinas"
+date: '2022-05-22'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Nuestro proyecto busca encontrar sí existe una relación en factores sociales, educativos y generacionales, con creencias sobre SARS-CoV-2 y la vacunación.**
+
+Vamos a generar una red donde observemos los dosis de vacuna por individuo
+```{r}
+VacunasM <- read.csv("vacunas.xlsx - Hoja1.csv")
+## Establecemos los nombres de las columnas en la fila 1
+rownames(VacunasM)<-VacunasM[,1]
+#Eliminamos la fila 1 de la base de datos que contiene nombres
+VacunasM <- VacunasM[,-1]
+#Visualizamos nuestra base de datos
+VacunasM
+```
+```{r}
+#Convertimos nuestra base de datos en una matriz
+VacunasMM <- as.matrix(VacunasM)
+#Vamos a hacer una matriz de correlación para tener valores entre 0 y 1 que nos indiquen 
+#la correlación entre infividuos
+VacunasCor <- cor(t(VacunasMM))
+#ponemos los valores de la diagonal en 0
+diag(VacunasCor)<-0
+
+```
+
+Imprimimos el heatmap
+```{r, echo=FALSE}
+#Con la matriz de correlación podemos hacer un heatmap para observar los grupos que se forman
+heatmap(VacunasCor)
+```
+
+Vamos a contruir la red
+
+```{r}
+##Vamos a hacer que los valores de la correlación queden entre 0 y 1
+VacunasAd1 <- (1+VacunasCor)/2
+#Ponemos en 0 la diagonal de la matriz
+diag(VacunasAd1)<-0
+#Indicamos que los valores mayores a 0.75 se les ponga un 1
+Vcerouno <- ifelse(VacunasAd1>0.75,1,0)
+#Convertimos a matriz
+Vcerouno <- as.matrix(Vcerouno)
+
+#Cargamos la libreria de igraph
+library(igraph)
+
+#Convertimos nuestra matriz en una matriz de Adyacencia
+AdyacenciaV <- graph_from_adjacency_matrix(Vcerouno)
+
+
+V(AdyacenciaV)$size<-degree(AdyacenciaV,mode="in")*3  #Hacemos el tamaño de los nodos por el valor del degree de entrada
+V(AdyacenciaV)$color="#96F7D2" #les ponemos colorcito
+V(AdyacenciaV)$shape="sphere" #establecemos forma
+E(AdyacenciaV)$color="white" #damos color a las conexiones
+
+```
+
+```{r, echo=FALSE}
+#Hacemos el fondo de los plots a color negro
+par(bg="black")
+
+#Imprimimos el plot
+
+plot(AdyacenciaV,edge.arrow.size=0.15,edge.curved=0.3,vertex.label.font=15, 
+     vertex.label.color="#F1F7E7",vertex.label.cex=0.7)
+```
+
+Observamos la presencia de tres grupos muy marcados por lo que decidimos no realizar un cluster
+
+**Ahora realizaremos lo mismo por área de trabajo**
+
+```{r}
+AreaM <- read.csv("area.xlsx - Hoja1.csv")
+## Establecemos los nombres de las columnas en la fila 1
+rownames(AreaM)<-AreaM[,1]
+#Eliminamos la fila 1 de la base de datos que contiene nombres
+AreaM <- AreaM[,-1]
+#Visualizamos nuestra base de datos
+AreaM
+```
+```{r}
+#Convertimos nuestra base de datos en una matriz
+AreaMM <- as.matrix(AreaM)
+#Vamos a hacer una matriz de correlación para tener valores entre 0 y 1 que nos indiquen 
+#la correlación entre infividuos
+AreaCor <- cor(t(AreaMM))
+#ponemos los valores de la diagonal en 0
+diag(AreaCor)<-0
+
+```
+
+Imprimimos el heatmap
+```{r, echo=FALSE}
+#Con la matriz de correlación podemos hacer un heatmap para observar los grupos que se forman
+heatmap(AreaCor)
+```
+
+Vamos a contruir la red
+
+```{r}
+##Vamos a hacer que los valores de la correlación queden entre 0 y 1
+AreaAd1 <- (1+AreaCor)/2
+#Ponemos en 0 la diagonal de la matriz
+diag(AreaAd1)<-0
+#Indicamos que los valores mayores a 0.75 se les ponga un 1
+Acerouno <- ifelse(AreaAd1>0.75,1,0)
+#Convertimos a matriz
+Acerouno <- as.matrix(Acerouno)
+
+#Cargamos la libreria de igraph
+library(igraph)
+
+#Convertimos nuestra matriz en una matriz de Adyacencia
+AdyacenciaA <- graph_from_adjacency_matrix(Acerouno)
+
+
+V(AdyacenciaA)$size<-degree(AdyacenciaV,mode="in")*3  #Hacemos el tamaño de los nodos por el valor del degree de entrada
+V(AdyacenciaA)$color="#96F7D2" #les ponemos colorcito
+V(AdyacenciaA)$shape="sphere" #establecemos forma
+E(AdyacenciaA)$color="white" #damos color a las conexiones
+
+```
+
+```{r, echo=FALSE}
+#Hacemos el fondo de los plots a color negro
+par(bg="black")
+
+#Imprimimos el plot
+
+plot(AdyacenciaA,edge.arrow.size=0.15,edge.curved=0.3,vertex.label.font=15, 
+     vertex.label.color="#F1F7E7",vertex.label.cex=0.7)
+```
+
+Separamos por clusters
+
+```{r}
+eb <- cluster_edge_betweenness(AdyacenciaA, directed = TRUE)
+table(membership(eb))
+
+#Nos indica la presencia de 11 clusters
+```
+
+```{r, echo=FALSE}
+#Hacemos el fondo de los plots a color negro
+par(bg="black")
+
+#Imprimimos el plot
+
+plot(eb, AdyacenciaA)#separa y colorea los clusters
+
+#Hubiera esperado solo 7 clusters por los resultados del heatmap, pero salieron 11
+```
+
+Por, último haremos uno con la fuente principal de información
+
+```{r}
+FuenteM <- read.csv("fuente de información.xlsx - Hoja1.csv")
+## Establecemos los nombres de las columnas en la fila 1
+rownames(FuenteM)<-FuenteM[,1]
+#Eliminamos la fila 1 de la base de datos que contiene nombres
+FuenteM <- FuenteM[,-1]
+#Visualizamos nuestra base de datos
+FuenteM
+```
+
+```{r}
+#Convertimos nuestra base de datos en una matriz
+FuenteMM <- as.matrix(FuenteM)
+#Vamos a hacer una matriz de correlación para tener valores entre 0 y 1 que nos indiquen 
+#la correlación entre infividuos
+FuenteCor <- cor(t(FuenteMM))
+#ponemos los valores de la diagonal en 0
+diag(FuenteCor)<-0
+
+```
+
+Imprimimos el heatmap
+```{r, echo=FALSE}
+#Con la matriz de correlación podemos hacer un heatmap para observar los grupos que se forman
+heatmap(FuenteCor)
+```
+
+Vamos a contruir la red
+
+```{r}
+##Vamos a hacer que los valores de la correlación queden entre 0 y 1
+FuenteAd1 <- (1+FuenteCor)/2
+#Ponemos en 0 la diagonal de la matriz
+diag(FuenteAd1)<-0
+#Indicamos que los valores mayores a 0.75 se les ponga un 1
+Fuenteuno <- ifelse(FuenteAd1>0.75,1,0)
+#Convertimos a matriz
+Fuenteuno <- as.matrix(Fuenteuno)
+
+#Cargamos la libreria de igraph
+library(igraph)
+
+#Convertimos nuestra matriz en una matriz de Adyacencia
+AdyacenciaF <- graph_from_adjacency_matrix(Fuenteuno)
+
+
+V(AdyacenciaF)$size<-degree(AdyacenciaF,mode="in")*3  #Hacemos el tamaño de los nodos por el valor del degree de entrada
+V(AdyacenciaF)$color="#96F7D2" #les ponemos colorcito
+V(AdyacenciaF)$shape="sphere" #establecemos forma
+E(AdyacenciaF)$color="white" #damos color a las conexiones
+
+```
+
+```{r, echo=FALSE}
+#Hacemos el fondo de los plots a color negro
+par(bg="black")
+
+#Imprimimos el plot
+
+plot(AdyacenciaF,edge.arrow.size=0.15,edge.curved=0.3,vertex.label.font=15, 
+     vertex.label.color="#F1F7E7",vertex.label.cex=0.7)
+```
+
+Separamos por clusters
+
+```{r}
+eb <- cluster_edge_betweenness(AdyacenciaF, directed = TRUE)
+eb
+table(membership(eb))
+
+#Nos indica la presencia de 3 clusters
+#El primero con 25 personas es el grupo que se informo de la vacunación por medio del comunicado oficial
+#El segunfo de 20 personas se informo por medio de noticias en redes sociales
+#El tercero de 11 por medio de articulos cientificos
+```
+```{r, echo=FALSE}
+#Hacemos el fondo de los plots a color negro
+par(bg="black")
+
+#Imprimimos el plot
+
+plot(eb, AdyacenciaF)#separa y colorea los clusters
+
+#Hubiera esperado solo 7 clusters por los resultados del heatmap, pero salieron 11
+```
+
+*Ahora vamos a los análisis estadísticos* 
+
+```{r}
+#Cargamos nuestra base de datos completa
+datos <- read.csv("Datos - Hoja 1.csv")
+
+#Cargamos las siguientes librerias
+library(Rmisc) 
+library(lattice)
+library (plyr)
+
+```
+
+Primero veremos si el sector tiene un efecto sobre el número de dosis que se puso cada individuo
+
+```{r}
+
+resumenD <- summarySE (datos, #base de datos
+                      measurevar = "Dosis", 
+                      groupvars = "Sector") 
+resumenD #imprime el resumen con los datos de dieta y peso con, sd, se y ci
+
+
+```
+
+```{r}
+
+#cargar ggplot2 que contiene la funci?n ggplot para hacer la grafica
+
+library (ggplot2) 
+graficaD <- ggplot(resumenD, aes(x = Sector, y = Dosis, fill = Sector)) + #objeto con los datos y su variable, rellenar color por dietas
+    geom_bar(position = position_dodge (), stat = "identity") + #tipo de grafica de barras
+    geom_errorbar(aes(ymin = Dosis - ci, ymax = Dosis + ci), #intervalo de confianza
+                  width =.1, 
+                  position = position_dodge(.9)) #cargar datos de la grafica
+```
+
+Imprimimos la gráfica
+```{r, echo=FALSE}
+graficaD
+
+#Vemos que el promedio de vacunas puestas es de 2 sin importar el sector 
+```
+
+Hacemos una anova
+```{r}
+
+#El sector dónde se desarrollan tiene efectos en el número de dosis que se pusieron
+pruebac <- aov (Dosis ~ Sector , datos)
+pruebac
+
+#Imprimimos el resumen de nuestra anova
+summary (pruebac)
+
+#Valor de P de 0.24 se rechza la hipotesis
+```
+Hay una relación con la fuente de información sobre vacunación y la cantidad de dosis
+```{r}
+
+resumenI <- summarySE (datos, #base de datos
+                      measurevar = "Dosis", 
+                      groupvars = "InfVacunacion") 
+resumenI #imprime el resumen con los datos de dieta y peso con, sd, se y ci
+
+```
+```{r}
+
+#cargar ggplot2 que contiene la funci?n ggplot para hacer la grafica
+
+library (ggplot2) 
+graficaI <- ggplot(resumenI, aes(x = InfVacunacion, y = Dosis, fill = InfVacunacion)) + #objeto con los datos y su variable, rellenar color por dietas
+    geom_bar(position = position_dodge (), stat = "identity") + #tipo de grafica de barras
+    geom_errorbar(aes(ymin = Dosis - ci, ymax = Dosis + ci), #intervalo de confianza
+                  width =.1, 
+                  position = position_dodge(.9)) #cargar datos de la grafica
+```
+
+```{r, echo=FALSE}
+graficaI
+```
+
+Hacemos una anova
+```{r}
+
+#El sector dónde se desarrollan tiene efectos en el número de dosis que se pusieron
+pruebaI <- aov (Dosis ~ InfVacunacion , datos)
+pruebaI
+
+#Imprimimos el resumen de nuestra anova
+summary (pruebaI)
+
+#Valor de P de 0.34 se rechza la hipotesis
+```
+
+Por último vemos si la edad influye en cómo es que se informaron las personas
+
+```{r}
+
+resumenE <- summarySE (datos, #base de datos
+                      measurevar = "Edad", 
+                      groupvars = "InfVacunacion") 
+resumenE #imprime el resumen con los datos de dieta y peso con, sd, se y ci
+
+```
+```{r}
+
+#cargar ggplot2 que contiene la funci?n ggplot para hacer la grafica
+
+library (ggplot2) 
+graficaE <- ggplot(resumenE, aes(x = InfVacunacion, y = Edad, fill = InfVacunacion)) + #objeto con los datos y su variable, rellenar color por dietas
+    geom_bar(position = position_dodge (), stat = "identity") + #tipo de grafica de barras
+    geom_errorbar(aes(ymin = Edad - ci, ymax = Edad + ci), #intervalo de confianza
+                  width =.1, 
+                  position = position_dodge(.9)) #cargar datos de la grafica
+```
+
+```{r, echo=FALSE}
+graficaE
+```
+
+Hacemos una anova
+```{r}
+
+#El sector dónde se desarrollan tiene efectos en el número de dosis que se pusieron
+pruebaE <- aov (Edad ~ InfVacunacion , datos)
+pruebaE
+
+#Imprimimos el resumen de nuestra anova
+summary (pruebaE)
+
+#Valor de P de 0.1 se rechza la hipotesis
+```

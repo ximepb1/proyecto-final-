@@ -1,0 +1,58 @@
+Edad,Sexo,Nivel de estudio,Sector ,Informacion,Existencia,Efectividad,Dosis,Seguridad,InfVacunacion,Cubre bocas,Reuniones,SanaDistancia,RegresoNormalidad,Conocido,Dioxido,Invento
+44,Femenino,Preparatoria,Sector salud,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,1,1,1,0,0
+21,Femenino,Universidad,Estudiante,A. Cientificos,1,1,3,1,A Cientificos,1,1,0,1,0,0,0
+32,Femenino,Universidad,Sector salud,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,0,1,1,0,0
+23,Masculino,Universidad,Obrero,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,1,0,1,0,0
+20,Femenino,Universidad,Sector educativo,Noticias en redes sociales,1,1,3,0,Noticias de redes sociales,1,1,0,1,1,0,0
+20,Masculino,Preparatoria,Obrero,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,1,1,1,0,0
+23,Femenino,Universidad,Empleado,Noticias en redes sociales,1,0,2,0,Noticias de redes sociales,1,1,1,0,1,0,0
+38,Masculino,Universidad,Area industrial,A Cientificos,1,1,3,1,Comunicado oficial,1,1,0,1,1,1,0
+39,Masculino,Universidad,Sector educativo,Noticias en redes sociales,1,1,2,1,Comunicado oficial,1,1,0,1,1,0,0
+20,Masculino,Preparatoria,Sector salud,A Cientificos,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+46,Femenino,Universidad,Sector educativo,Noticias en redes sociales,1,1,2,1,A Cientificos,1,1,0,1,1,0,0
+19,Masculino,Universidad,Estudiante,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,0,1,0,0,0
+21,Femenino,Universidad,Estudiante,Noticias en redes sociales,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+18,Femenino,Universidad,Estudiante,Libros y tecnología ,0,0,3,1,Noticias de redes sociales,0,0,0,1,1,0,1
+23,Masculino,Universidad,Ciencias sociales,Noticias en redes sociales,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+41,Masculino,Preparatoria,Obrero,Noticias en redes sociales,0,0,0,1,Noticias de redes sociales,1,0,1,1,1,0,1
+23,Masculino,Universidad,Estudiante,Noticias en redes sociales,1,0,2,1,A Cientificos,1,1,0,1,1,0,0
+22,Femenino,Universidad,Estudiante,Noticias en redes sociales,1,1,3,0,Comunicado oficial,1,1,0,1,1,0,0
+15,Masculino,Preparatoria,Estudiante,Television,1,1,2,1,Comunicado oficial,1,1,0,1,1,1,0
+23,Femenino,Universidad,Ciencias sociales,Noticias en redes sociales,1,1,2,1,Comunicado oficial,1,1,0,1,1,0,0
+22,Femenino,Universidad,Sector salud ,Noticias en redes sociales,1,0,0,0,Comunicado oficial,1,1,0,1,1,0,0
+20,Femenino,Universidad,Estudiante ,Noticias en redes sociales,1,1,2,0,Noticias de redes sociales,1,1,0,0,1,0,0
+21,Femenino,Universidad,Estudiante ,Noticias en redes sociales,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+22,Masculino,Universidad,Estudiante ,A Cientificos,1,1,2,1,A Cientificos,1,1,1,1,1,0,0
+21,Masculino,Universidad,Estudiante ,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,0,1,1,1,0
+41,Femenino,Universidad,Sector educativo,Television,1,1,2,1,Comunicado oficial,1,1,1,1,1,0,0
+21,Femenino,Universidad,Estudiante,Noticias en redes sociales,1,0,2,1,A Cientificos,0,1,0,1,1,0,0
+23,Femenino,Universidad,Estudiante,A Cientificos,1,1,3,1,A Cientificos,1,1,1,1,1,0,0
+22,Femenino,Preparatoria,Empleado,Periodico,1,1,3,0,Noticias de redes sociales,1,1,1,1,1,0,0
+22,Femenino,Universidad,Sector salud,A Cientificos,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+30,Femenino,Universidad,Empleado,A Cientificos,1,0,3,0,Comunicado oficial,1,1,0,1,1,0,1
+21,Femenino,Preparatoria,Empleado,Noticias en redes sociales,0,1,0,1,Comunicado oficial,1,0,1,1,1,0,0
+23,Femenino,Universidad,Sector industrial,A Cientificos,1,1,2,1,A Cientificos,1,1,1,1,1,0,0
+28,Masculino,Universidad,Sector educativo,A Cientificos,1,1,3,1,Comunicado oficial,1,1,1,1,1,0,0
+44,Femenino,Preparatoria,Empleado,Noticias en redes sociales,1,1,2,1,Comunicado oficial,1,1,0,1,1,0,0
+22,Femenino,Universidad,Sector salud,A Cientificos,1,1,2,0,Comunicado oficial,1,1,0,1,1,0,0
+49,Masculino,Preparatoria,Empleado,Television,1,1,2,1,Comunicado oficial,1,1,1,1,1,0,1
+24,Femenino,Universidad,Sector salud,A Cientificos,1,1,2,1,Comunicado oficial,1,1,1,1,1,0,0
+25,Femenino,Universidad,Sector salud,A Cientificos,1,1,3,1,Noticias de redes sociales,1,0,1,1,1,0,0
+20,Femenino,Universidad,Estudiante,Noticias en redes sociales,1,0,3,1,A Cientificos,1,1,1,1,0,0,0
+19,Masculino,Preparatoria,Sector salud,Noticias en redes sociales,1,1,0,1,A Cientificos,1,1,0,1,1,0,0
+23,Femenino,Universidad,Sector salud,A Cientificos,1,1,3,1,Noticias de redes sociales,1,1,0,1,1,0,0
+21,Femenino,Universidad,Sector salud,Noticias en redes sociales,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+31,Femenino,Universidad,Sector educativo,Noticias en redes sociales,0,0,0,1,Noticias de redes sociales,1,0,0,0,0,0,1
+22,Femenino,Posgrado,Ciencias sociales,Noticias en redes sociales,1,1,2,0,Comunicado oficial,1,1,0,1,1,0,0
+27,Masculino,Universidad,Sector industrial,Noticias en redes sociales,1,1,2,0,Noticias de redes sociales,1,1,0,1,1,0,0
+23,Femenino,Universidad,Sector salud,A Cientificos,1,1,3,1,A Cientificos,1,1,1,1,1,0,0
+23,Femenino,Universidad,Sector industrial,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,0,1,1,0,0
+24,Masculino,Universidad,Sector salud,Noticias en redes sociales,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+23,Masculino,Universidad,Sector salud,Noticias en redes sociales,1,1,2,1,A Cientificos,1,1,0,1,1,0,0
+25,Femenino,Universidad,Sector salud,A Cientificos,1,1,3,1,A Cientificos,1,0,1,1,1,0,0
+25,Femenino,Universidad,Sector industrial,Noticias en redes sociales,1,1,2,1,Noticias de redes sociales,1,1,0,1,1,0,0
+25,Femenino,Universidad,Sector salud,A Cientificos,1,1,0,1,Comunicado oficial,1,1,1,1,1,0,0
+21,Femenino,Universidad,Estudiante,Noticias en redes sociales,1,1,3,0,Comunicado oficial,1,1,0,1,1,0,0
+21,Femenino,Preparatoria,Sector industrial,Noticias en redes sociales,1,1,3,1,A Cientificos,1,1,0,1,1,0,0
+21,Femenino,Universidad,Estudiante,Noticias en redes sociales,1,1,3,1,Comunicado oficial,1,1,0,0,1,0,0
+20,Masculino,Universidad,Sector industrial,Noticias en redes sociales,1,1,3,1,A Cientificos,1,0,0,1,1,0,0
